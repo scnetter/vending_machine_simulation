@@ -4,6 +4,7 @@ public class VendingItem {
     private String name;
     private double price;
     private String slot;
+    private String category;
     private int remaining;
 
     public String getName() {
@@ -16,6 +17,14 @@ public class VendingItem {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setPrice(double price) {
