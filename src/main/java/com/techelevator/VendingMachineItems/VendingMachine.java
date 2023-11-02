@@ -19,6 +19,8 @@ public class VendingMachine {
 
 
                 String[] itemArray = inLine.split("\\|");
+                VendingItem vendingItem = new VendingItem(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                this.inventory.put(vendingItem.getSlot(), vendingItem);
             }
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
