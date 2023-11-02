@@ -9,16 +9,19 @@ import java.util.Scanner;
 public class VendingMachine {
 
     private Map<String, VendingItem> inventory;
-    public VendingMachine() throws FileNotFoundException {
+    public VendingMachine() {
 
         File inputFile = new File("vendingmachine.csv");
-        Scanner scanner = new Scanner(inputFile);
+        try(Scanner scanner = new Scanner(inputFile)) {
 
-        while (scanner.hasNextLine()) {
-            String inLine = scanner.nextLine();
+            while (scanner.hasNextLine()) {
+                String inLine = scanner.nextLine();
 
 
-            String[] itemArray = inLine.split("\\|");
+                String[] itemArray = inLine.split("\\|");
+            }
+        } catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
         }
     }
 
