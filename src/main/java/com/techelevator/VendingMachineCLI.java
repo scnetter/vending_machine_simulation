@@ -28,10 +28,10 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
+		VendingMachine vendMachine = new VendingMachine();
 		boolean running = true;
 		while (running) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-			VendingMachine vendMachine = new VendingMachine();
 
 			switch (choice) {
 				case MAIN_MENU_OPTION_DISPLAY_ITEMS:

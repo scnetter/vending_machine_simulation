@@ -51,6 +51,7 @@ public class VendingItem {
         this.slot = slot;
         this.name = name;
         this.price = price;
+        this.category = category;
         this.remaining = 5;
     }
 
