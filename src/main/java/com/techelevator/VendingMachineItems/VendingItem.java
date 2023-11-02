@@ -47,7 +47,7 @@ public class VendingItem {
         this.remaining = remaining;
     }
 
-    public VendingItem(String slot, String name, double price){
+    public VendingItem(String slot, String name, double price, String category){
         this.slot = slot;
         this.name = name;
         this.price = price;
