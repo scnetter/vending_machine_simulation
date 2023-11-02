@@ -11,6 +11,7 @@ public class VendingMachine {
     private Map<String, VendingItem> inventory;
     public VendingMachine() {
         inventory = new HashMap<String, VendingItem>();
+        VendingItem vendingItem;
         File inputFile = new File("vendingmachine.csv");
         try(Scanner scanner = new Scanner(inputFile)) {
 
@@ -19,7 +20,22 @@ public class VendingMachine {
 
 
                 String[] itemArray = inLine.split("\\|");
-                VendingItem vendingItem = new VendingItem(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                switch (itemArray[3]) {
+                    case "Candy":
+                        vendingItem = new Candy(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                        break;
+                    case "Gum":
+                        vendingItem = new Gum(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                        break;
+                    case "Chips":
+                        vendingItem = new Chips(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                        break;
+                    case "Drink":
+                        vendingItem = new Drink(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                        break;
+                    default:
+                        vendingItem = new VendingItem(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
+                }
                 this.inventory.put(vendingItem.getSlot(), vendingItem);
             }
         } catch (FileNotFoundException e){
