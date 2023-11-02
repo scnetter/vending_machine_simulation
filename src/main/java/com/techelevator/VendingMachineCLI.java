@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import com.techelevator.VendingMachineItems.VendingMachine;
 import com.techelevator.view.VendingMenu;
 
 
@@ -28,12 +29,19 @@ public class VendingMachineCLI {
 		boolean running = true;
 		while (running) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+			VendingMachine vendMachine = new VendingMachine();
 
-			// A switch statement could also be used here.  Your choice.
-			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// display vending machine items
-			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
+			switch (choice) {
+				case MAIN_MENU_OPTION_DISPLAY_ITEMS:
+					// display vending machine items
+//					// List<Items> items = vendingMachine.getInventory()
+//					// for(Item item : items){
+//					//    printf
+					break;
+				case MAIN_MENU_OPTION_PURCHASE:
+					break;
+				case MAIN_MENU_OPTION_EXIT:
+					running = false;
 			}
 		}
 	}
