@@ -53,4 +53,8 @@ public class VendingItem {
         this.price = price;
         this.remaining = 5;
     }
+
+    public String message(){
+        return "I taste generic.";
+    }
 }
