@@ -1,8 +1,10 @@
 package com.techelevator;
 
+import com.techelevator.VendingMachineItems.VendingItem;
 import com.techelevator.VendingMachineItems.VendingMachine;
 import com.techelevator.view.VendingMenu;
 
+import java.util.Map;
 
 
 public class VendingMachineCLI {
@@ -37,6 +39,10 @@ public class VendingMachineCLI {
 //					// List<Items> items = vendingMachine.getInventory()
 //					// for(Item item : items){
 //					//    printf
+					Map<String, VendingItem> inventory = vendMachine.getInventory();
+					for(VendingItem item : inventory.values()){
+						System.out.printf("%-4s %-20s %-10.2f \n", item.getSlot(), item.getName(), item.getPrice());
+					}
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:
 					break;

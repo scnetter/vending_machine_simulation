@@ -10,7 +10,7 @@ public class VendingMachine {
 
     private Map<String, VendingItem> inventory;
     public VendingMachine() {
-
+        inventory = new HashMap<String, VendingItem>();
         File inputFile = new File("vendingmachine.csv");
         try(Scanner scanner = new Scanner(inputFile)) {
 
@@ -25,6 +25,10 @@ public class VendingMachine {
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public Map<String, VendingItem> getInventory(){
+        return this.inventory;
     }
 
 }
