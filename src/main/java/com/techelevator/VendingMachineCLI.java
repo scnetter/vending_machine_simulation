@@ -39,11 +39,11 @@ public class VendingMachineCLI {
 //					// List<Items> items = vendingMachine.getInventory()
 //					// for(Item item : items){
 //					//    printf
-					System.out.printf("%-4s %-20s %-10s \n", "Slot", "Item Name", "Price");
-					System.out.println("--------------------------------");
+					System.out.printf("%-4s %-20s %-10s %-10s \n", "Slot", "Item Name", "Price", "Remaining");
+					System.out.println("----------------------------------------------");
 					Map<String, VendingItem> inventory = vendMachine.getInventory();
 					for(VendingItem item : inventory.values()){
-						System.out.printf("%-4s %-20s %-10.2f \n", item.getSlot(), item.getName(), item.getPrice());
+						System.out.printf("%-4s %-20s %-10.2f %4d \n", item.getSlot(), item.getName(), item.getPrice(), item.getRemaining());
 					}
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:

@@ -57,4 +57,11 @@ public class VendingItem {
     public String message(){
         return "I taste generic.";
     }
+
+    public int removeItem () {
+        if (getRemaining() == 0) {
+            return remaining;
+        }
+        return remaining-= 1;
+    }
 }
