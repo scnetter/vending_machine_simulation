@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class VendingMachine {
 
     private Map<String, VendingItem> inventory;
+
+    private double balance;
     public VendingMachine() {
         inventory = new HashMap<String, VendingItem>();
         VendingItem vendingItem;
@@ -41,10 +43,22 @@ public class VendingMachine {
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
+        this.balance = 0.0;
     }
+    public double getBalance() {
+        return balance;
+    }
+
 
     public Map<String, VendingItem> getInventory(){
         return this.inventory;
+    }
+
+    public void increaseBalance (double money) {
+        balance += money;
+    }
+    public void decreaseBalance (double money) {
+        balance -= money;
     }
 
     public void displayCurrentInventory(){
