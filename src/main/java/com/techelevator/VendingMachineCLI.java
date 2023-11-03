@@ -5,6 +5,7 @@ import com.techelevator.VendingMachineItems.VendingMachine;
 import com.techelevator.view.VendingMenu;
 
 import java.util.Map;
+import java.util.Scanner;
 
 
 public class VendingMachineCLI {
@@ -38,6 +39,24 @@ public class VendingMachineCLI {
 					vendMachine.displayCurrentInventory();
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:
+					System.out.printf("\nCurrent Money Provided: $%.2f \n", vendMachine.getBalance());
+					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					switch (purchaseChoice) {
+						// Use an if not FINISHED transaction and loop through
+						case PURCHASE_MENU_OPTION_FEED_MONEY:
+							System.out.print("Enter amount to add to balance: ");
+							Scanner moneyIn = new Scanner(System.in);
+							double userInput = moneyIn.nextDouble();
+							moneyIn.nextLine();
+							vendMachine.increaseBalance(userInput);
+							System.out.printf("\nCurrent Money Provided: $%.2f \n", vendMachine.getBalance());
+							menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+							break;
+						case PURCHASE_MENU_OPTION_SELECT_PRODUCT:
+							break;
+						case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
+							break;
+					}
 					break;
 				case MAIN_MENU_OPTION_EXIT:
 					running = false;
