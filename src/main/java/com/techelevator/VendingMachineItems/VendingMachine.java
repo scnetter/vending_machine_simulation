@@ -52,7 +52,12 @@ public class VendingMachine {
         System.out.println("----------------------------------------------");
         Map<String, VendingItem> inventory = getInventory();
         for(VendingItem item : inventory.values()){
-            System.out.printf("%-4s %-20s %-10.2f %4d \n", item.getSlot(), item.getName(), item.getPrice(), item.getRemaining());
+            if (item.getRemaining() > 0) {
+                System.out.printf("%-4s %-20s %-10.2f %4d \n", item.getSlot(), item.getName(), item.getPrice(), item.getRemaining());
+            } else {
+                System.out.printf("%-4s %-20s %-10.2f %8s \n", item.getSlot(), item.getName(), item.getPrice(), "SOLD OUT");
+            }
+
         }
     }
 
