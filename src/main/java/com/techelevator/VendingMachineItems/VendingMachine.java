@@ -47,4 +47,13 @@ public class VendingMachine {
         return this.inventory;
     }
 
+    public void displayCurrentInventory(){
+        System.out.printf("%-4s %-20s %-10s %-10s \n", "Slot", "Item Name", "Price", "Remaining");
+        System.out.println("----------------------------------------------");
+        Map<String, VendingItem> inventory = getInventory();
+        for(VendingItem item : inventory.values()){
+            System.out.printf("%-4s %-20s %-10.2f %4d \n", item.getSlot(), item.getName(), item.getPrice(), item.getRemaining());
+        }
+    }
+
 }

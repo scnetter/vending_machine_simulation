@@ -35,16 +35,7 @@ public class VendingMachineCLI {
 
 			switch (choice) {
 				case MAIN_MENU_OPTION_DISPLAY_ITEMS:
-					// display vending machine items
-//					// List<Items> items = vendingMachine.getInventory()
-//					// for(Item item : items){
-//					//    printf
-					System.out.printf("%-4s %-20s %-10s %-10s \n", "Slot", "Item Name", "Price", "Remaining");
-					System.out.println("----------------------------------------------");
-					Map<String, VendingItem> inventory = vendMachine.getInventory();
-					for(VendingItem item : inventory.values()){
-						System.out.printf("%-4s %-20s %-10.2f %4d \n", item.getSlot(), item.getName(), item.getPrice(), item.getRemaining());
-					}
+					vendMachine.displayCurrentInventory();
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:
 					break;
