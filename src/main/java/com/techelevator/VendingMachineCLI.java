@@ -5,6 +5,7 @@ import com.techelevator.VendingMachineItems.VendingMachine;
 import com.techelevator.view.VendingMenu;
 
 import java.util.Map;
+import java.util.Scanner;
 
 
 public class VendingMachineCLI {
@@ -28,22 +29,43 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
-		VendingMachine vendMachine = new VendingMachine();
+		VendingMachine vendingMachine = new VendingMachine();
 		boolean running = true;
 		while (running) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			switch (choice) {
 				case MAIN_MENU_OPTION_DISPLAY_ITEMS:
-					vendMachine.displayCurrentInventory();
+					vendingMachine.displayCurrentInventory();
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:
-
+					purchaseMenu(vendingMachine);
 					break;
 				case MAIN_MENU_OPTION_EXIT:
 					running = false;
 			}
 		}
+	}
+
+	public void purchaseMenu(VendingMachine vendingMachine) {
+		System.out.printf("\nCurrent Money Provided: $%.2f \n", vendingMachine.getBalance());
+		String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+		while (!purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION))
+			switch (purchaseChoice) {
+				case PURCHASE_MENU_OPTION_FEED_MONEY:
+					System.out.print("Enter amount to add to balance: ");
+					Scanner moneyIn = new Scanner(System.in);
+					double userInput = moneyIn.nextDouble();
+					moneyIn.nextLine();
+					vendingMachine.increaseBalance(userInput);
+					System.out.printf("\nCurrent Money Provided: $%.2f \n", vendingMachine.getBalance());
+					purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					break;
+				case PURCHASE_MENU_OPTION_SELECT_PRODUCT:
+					break;
+				case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
+					break;
+			}
 	}
 
 	public static void main(String[] args) {
