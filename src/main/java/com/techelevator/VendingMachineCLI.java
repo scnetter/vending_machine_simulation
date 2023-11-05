@@ -79,7 +79,7 @@ public class VendingMachineCLI {
 		if (vendingMachine.getInventory().containsKey(itemSelected)) {
 			VendingItem item = vendingMachine.getInventory().get(itemSelected);
 			if (item.getRemaining() == 0) {
-				System.out.println(itemSelected + "is sold out.");
+				System.out.println(itemSelected + " is sold out.");
 			} else if (item.getPrice() <= vendingMachine.getBalance()) {
 				vendingMachine.decreaseBalance(item.getPrice());
 				item.removeItem();
