@@ -29,7 +29,7 @@ public class VendingMachine {
                     case "Gum":
                         vendingItem = new Gum(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
                         break;
-                    case "Chips":
+                    case "Chip":
                         vendingItem = new Chips(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]), itemArray[3]);
                         break;
                     case "Drink":

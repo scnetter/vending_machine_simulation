@@ -74,7 +74,9 @@ public class VendingMachineCLI {
 						} else if (item.getPrice() <= vendingMachine.getBalance()) {
 							vendingMachine.decreaseBalance(item.getPrice());
 							item.removeItem();
-							System.out.println(item.message());
+							System.out.println(item.getName() + " Cost: " + item.getPrice() + " You have: " + vendingMachine.getBalance() + " remaining.\n" + item.message());
+						} else {
+							System.out.println("Insufficient funds.");
 						}
 					} else {
 						System.out.println("That is not a valid item.");
