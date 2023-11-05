@@ -62,6 +62,25 @@ public class VendingMachineCLI {
 					purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 					break;
 				case PURCHASE_MENU_OPTION_SELECT_PRODUCT:
+					vendingMachine.displayCurrentInventory();
+					System.out.print("Please select an item to purchase: ");
+					Scanner userSelection = new Scanner(System.in);
+					String itemSelected = userSelection.nextLine();
+
+					if (vendingMachine.getInventory().containsKey(itemSelected)) {
+						VendingItem item = vendingMachine.getInventory().get(itemSelected);
+						if (item.getRemaining() == 0) {
+							System.out.println(itemSelected + "is sold out.");
+						} else if (item.getPrice() <= vendingMachine.getBalance()) {
+							vendingMachine.decreaseBalance(item.getPrice());
+							item.removeItem();
+							System.out.println(item.message());
+						}
+					} else {
+						System.out.println("That is not a valid item.");
+					}
+					purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+
 					break;
 				case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
 					break;
