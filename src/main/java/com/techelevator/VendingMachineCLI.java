@@ -38,6 +38,7 @@ public class VendingMachineCLI {
 					vendMachine.displayCurrentInventory();
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:
+
 					break;
 				case MAIN_MENU_OPTION_EXIT:
 					running = false;
