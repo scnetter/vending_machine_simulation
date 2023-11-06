@@ -61,6 +61,10 @@ public class VendingMachine {
         balance -= money;
     }
 
+    public Map<String, String> returnChange(){
+        return ChangeCalculator.calculateChange(balance);
+    }
+
     public void displayCurrentInventory(){
         System.out.printf("%-4s %-20s %-10s %-10s \n", "Slot", "Item Name", "Price", "Remaining");
         System.out.println("----------------------------------------------");

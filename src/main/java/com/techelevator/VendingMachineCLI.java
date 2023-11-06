@@ -50,7 +50,8 @@ public class VendingMachineCLI {
 	public void purchaseMenu(VendingMachine vendingMachine) {
 		System.out.printf("\nCurrent Money Provided: $%.2f \n", vendingMachine.getBalance());
 		String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
-		while (!purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION))
+		Boolean running = true;
+		while (running)
 			switch (purchaseChoice) {
 				case PURCHASE_MENU_OPTION_FEED_MONEY:
 					System.out.print("Enter amount to add to balance: ");
@@ -66,6 +67,11 @@ public class VendingMachineCLI {
 					purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 					break;
 				case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
+					System.out.printf("Thank you for your purchase!\n Your change is: \n");
+					for(String denominations : vendingMachine.returnChange().values()){
+						System.out.printf("%-4s ", denominations);
+					}
+					running = false;
 					break;
 			}
 	}
