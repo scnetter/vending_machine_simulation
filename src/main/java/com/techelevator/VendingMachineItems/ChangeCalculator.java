@@ -21,7 +21,7 @@ public class ChangeCalculator {
 
             // If we can use this coin, update the change map
             if (numCoins > 0) {
-                change.put(formatCoin(coinValue), Integer.toString(numCoins));
+                change.put(formatCoin(coinValue, coinDenominations[i]), Integer.toString(numCoins));
                 centsAmount -= numCoins * (coinValue * 100);
             }
         }
@@ -29,11 +29,24 @@ public class ChangeCalculator {
         return change;
     }
 
-    private static String formatCoin(double coinValue) {
+    private static String formatCoin(double coinValue, double denomination) {
         if (coinValue >= 1.0) {
-            return "$" + Integer.toString((int) coinValue);
+            return "$" + Integer.toString((int) coinValue) + " Bill(s)";
         } else {
-            return Integer.toString((int) (coinValue * 100)) + "¢";
+            String tempCoinValue = Double.toString(coinValue);
+            switch((Double.toString(coinValue))){
+                case "0.25":
+                    return "Quarter(s)";
+                case "0.1":
+                    return "Dime(s)";
+                case "0.05":
+                    return "Nickel(s)";
+                case "0.01":
+                    return "Pennies";
+                default:
+                    return "Something went wrong.";
+            }
+            //return Integer.toString((int) (coinValue * 100)) + "¢";
         }
     }
 }

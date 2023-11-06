@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import com.techelevator.VendingMachineItems.ChangeCalculator;
 import com.techelevator.VendingMachineItems.VendingItem;
 import com.techelevator.VendingMachineItems.VendingMachine;
 import com.techelevator.view.VendingMenu;
@@ -68,8 +69,9 @@ public class VendingMachineCLI {
 					break;
 				case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
 					System.out.printf("Thank you for your purchase!\n Your change is: \n");
-					for(String denominations : vendingMachine.returnChange().values()){
-						System.out.printf("%-4s ", denominations);
+					Map<String, String> tempChange = ChangeCalculator.calculateChange(vendingMachine.getBalance());
+					for(Map.Entry<String, String> denominations : vendingMachine.returnChange().entrySet()){
+						System.out.println(denominations.getValue() + " x " + denominations.getKey());
 					}
 					running = false;
 					break;
