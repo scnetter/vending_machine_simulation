@@ -61,6 +61,7 @@ public class VendingMachineCLI {
 					moneyIn.nextLine();
 					vendingMachine.increaseBalance(userInput);
 					System.out.printf("\nCurrent Money Provided: $%.2f \n", vendingMachine.getBalance());
+					vendingMachine.logActivity("FEED MONEY: " + "$" + userInput + " " + "$" + vendingMachine.getBalance());
 					purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 					break;
 				case PURCHASE_MENU_OPTION_SELECT_PRODUCT:
@@ -70,9 +71,12 @@ public class VendingMachineCLI {
 				case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
 					System.out.printf("Thank you for your purchase!\n Your change is: \n");
 					Map<String, String> tempChange = ChangeCalculator.calculateChange(vendingMachine.getBalance());
+					double tempBalance = vendingMachine.getBalance();
 					for(Map.Entry<String, String> denominations : vendingMachine.returnChange().entrySet()){
 						System.out.println(denominations.getValue() + " x " + denominations.getKey());
 					}
+					vendingMachine.decreaseBalance(vendingMachine.getBalance());
+					vendingMachine.logActivity("GIVE CHANGE: $" + tempBalance + " $" + vendingMachine.getBalance());
 					running = false;
 					break;
 			}
@@ -91,6 +95,7 @@ public class VendingMachineCLI {
 			} else if (item.getPrice() <= vendingMachine.getBalance()) {
 				vendingMachine.decreaseBalance(item.getPrice());
 				item.removeItem();
+				vendingMachine.logActivity(item.getName() + " " + item.getSlot() + " $" + item.getPrice() + " $" + vendingMachine.getBalance());
 				System.out.println(item.getName() + " Cost: " + item.getPrice() + " You have: " + vendingMachine.getBalance() + " remaining.\n" + item.message());
 			} else {
 				System.out.println("Insufficient funds.");

@@ -1,16 +1,40 @@
 package com.techelevator.VendingMachineItems;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class VendingMachine {
+    public void logActivity(String message) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter myFormatObject = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
+        File logFile = new File("Log.txt");
+        PrintWriter writer = null;
+        if (logFile.exists()) {
+            try {
+                writer = new PrintWriter(new FileWriter(logFile, true));
+                catch (IOException e) {
+                    e.getMessage();
+                }
+            } else {
+                writer = new PrintWriter(logFile);
+            }
+
+            writer.append(currentDateTime.format(myFormatObject) + " " + message);
+
+//        catch (FileNotFoundException e){
+//                e.getMessage();
+//            }
+        }
+    }
 
     private Map<String, VendingItem> inventory;
 
     private double balance;
+
     public VendingMachine() {
         inventory = new HashMap<String, VendingItem>();
         VendingItem vendingItem;
