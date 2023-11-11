@@ -31,7 +31,7 @@ public class ChangeCalculator {
 
     private static String formatCoin(double coinValue, double denomination) {
         if (coinValue >= 1.0) {
-            return "$" + Integer.toString((int) coinValue) + " Bill(s)";
+            return "$" + (int) coinValue + " Bill(s)";
         } else {
             String tempCoinValue = Double.toString(coinValue);
             switch((Double.toString(coinValue))){

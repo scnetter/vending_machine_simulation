@@ -23,7 +23,7 @@ public class VendingMachineCLI {
 	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_SECRET_OPTION };
 	private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
 
-	private VendingMenu menu;
+	private final VendingMenu menu;
 
 	public VendingMachineCLI(VendingMenu menu) {
 		this.menu = menu;
@@ -69,7 +69,7 @@ public class VendingMachineCLI {
 					purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 					break;
 				case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
-					System.out.printf("Thank you for your purchase!\n Your change is: \n");
+					System.out.print("Thank you for your purchase!\n Your change is: \n");
 					Map<String, String> tempChange = ChangeCalculator.calculateChange(vendingMachine.getBalance());
 					double tempBalance = vendingMachine.getBalance();
 					for(Map.Entry<String, String> denominations : vendingMachine.returnChange().entrySet()){

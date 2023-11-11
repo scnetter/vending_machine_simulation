@@ -13,25 +13,28 @@ public class VendingMachine {
         DateTimeFormatter myFormatObject = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
         File logFile = new File("Log.txt");
         PrintWriter writer = null;
+
         if (logFile.exists()) {
             try {
                 writer = new PrintWriter(new FileWriter(logFile, true));
-                catch (IOException e) {
-                    e.getMessage();
-                }
-            } else {
-                writer = new PrintWriter(logFile);
+            } catch (FileNotFoundException e) {
+                e.getMessage();
+            } catch (IOException e) {
+                e.getMessage();
             }
-
-            writer.append(currentDateTime.format(myFormatObject) + " " + message);
-
-//        catch (FileNotFoundException e){
-//                e.getMessage();
-//            }
+        } else {
+            try {
+                writer = new PrintWriter(logFile);
+            } catch (FileNotFoundException e) {
+                e.getMessage();
+            }
         }
+        writer.append(currentDateTime.format(myFormatObject) + " " + message + "\n");
+        writer.flush();
+        writer.close();
     }
 
-    private Map<String, VendingItem> inventory;
+    private final Map<String, VendingItem> inventory;
 
     private double balance;
 
@@ -39,7 +42,7 @@ public class VendingMachine {
         inventory = new HashMap<String, VendingItem>();
         VendingItem vendingItem;
         File inputFile = new File("vendingmachine.csv");
-        try(Scanner scanner = new Scanner(inputFile)) {
+        try (Scanner scanner = new Scanner(inputFile)) {
 
             while (scanner.hasNextLine()) {
                 String inLine = scanner.nextLine();
@@ -64,36 +67,38 @@ public class VendingMachine {
                 }
                 this.inventory.put(vendingItem.getSlot(), vendingItem);
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
         this.balance = 0.0;
     }
+
     public double getBalance() {
         return balance;
     }
 
 
-    public Map<String, VendingItem> getInventory(){
+    public Map<String, VendingItem> getInventory() {
         return this.inventory;
     }
 
-    public void increaseBalance (double money) {
+    public void increaseBalance(double money) {
         balance += money;
     }
-    public void decreaseBalance (double money) {
+
+    public void decreaseBalance(double money) {
         balance -= money;
     }
 
-    public Map<String, String> returnChange(){
+    public Map<String, String> returnChange() {
         return ChangeCalculator.calculateChange(balance);
     }
 
-    public void displayCurrentInventory(){
+    public void displayCurrentInventory() {
         System.out.printf("%-4s %-20s %-10s %-10s \n", "Slot", "Item Name", "Price", "Remaining");
         System.out.println("----------------------------------------------");
         Map<String, VendingItem> inventory = getInventory();
-        for(VendingItem item : inventory.values()){
+        for (VendingItem item : inventory.values()) {
             if (item.getRemaining() > 0) {
                 System.out.printf("%-4s %-20s %-10.2f %4d \n", item.getSlot(), item.getName(), item.getPrice(), item.getRemaining());
             } else {

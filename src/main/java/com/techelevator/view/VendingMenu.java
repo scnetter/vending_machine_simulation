@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class VendingMenu {
 
-	private PrintWriter out;
-	private Scanner in;
+	private final PrintWriter out;
+	private final Scanner in;
 
 	public VendingMenu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
