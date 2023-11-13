@@ -69,7 +69,7 @@ public class VendingMachineCLI {
 					purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 					break;
 				case PURCHASE_MENU_OPTION_FINISH_TRANSACTION:
-					System.out.print("Thank you for your purchase!\n Your change is: \n");
+					System.out.print("Thank you for your purchase!\n Your change is " + vendingMachine.getBalance() + ": \n");
 					Map<String, String> tempChange = ChangeCalculator.calculateChange(vendingMachine.getBalance());
 					double tempBalance = vendingMachine.getBalance();
 					for(Map.Entry<String, String> denominations : vendingMachine.returnChange().entrySet()){
